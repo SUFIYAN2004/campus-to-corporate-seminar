@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>From Campus to Corporate — Seminar</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --glass: rgba(255,255,255,0.08);
+      --glass-strong: rgba(255,255,255,0.12);
+      --accent: #7c3aed;
+    }
+
+    html,body { height:100%; margin:0; overflow-x:hidden; }
+    body {
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: url('background.jpg') center/cover no-repeat fixed;
+      color: #fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(19,6,58,0.45), rgba(110,12,200,0.35) 50%, rgba(24,6,46,0.55));
+      mix-blend-mode: multiply;
+      pointer-events:none;
+      animation: shift 12s linear infinite;
+    }
+    @keyframes shift {
+      0% { transform:translateY(0) scale(1); filter: hue-rotate(0deg); }
+      50% { transform:translateY(-20px) scale(1.02); filter: hue-rotate(8deg); }
+      100% { transform:translateY(0) scale(1); filter: hue-rotate(0deg); }
+    }
+
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .reveal { opacity:0; transform: translateY(8px); transition: all 700ms cubic-bezier(.2,.9,.2,1); }
+    .reveal.visible { opacity:1; transform: translateY(0); }
+
+    .count-box { min-width:76px; border-radius:12px; padding:10px; }
+    .count-value { font-weight:800; font-size:1.4rem; letter-spacing:0.5px; }
+    .pulse { transform: scale(1.06); transition: transform 260ms cubic-bezier(.2,.9,.2,1); }
+
+    .btn-primary {
+      background: linear-gradient(90deg,#7c3aed,#06b6d4);
+      box-shadow: 0 8px 28px rgba(124,58,237,0.22);
+    }
+    .btn-primary:active { transform: translateY(1px); }
+
+    .btn-share { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.04); padding:8px 10px; border-radius:8px; }
+    .soft-shadow { box-shadow: 0 10px 30px rgba(2,6,23,0.45); }
+  </style>
+</head>
+<body>
+  <div class="relative min-h-screen">
+    <div class="bg-overlay"></div>
+
+    <!-- 🔹 College Header -->
+<header class="text-center py-8 reveal">
+  <div class="glass rounded-2xl p-6 md:p-8 inline-block soft-shadow">
+    <!-- Logo -->
+<div class="flex justify-center mb-4">
+  <img src="cahc.png" 
+       alt="College Logo" 
+       class="w-20 h-20 object-contain filter invert brightness-0" />
+</div>
+
+
+    <!-- Text -->
+    <h1 class="text-yellow-400 font-extrabold text-2xl md:text-3xl">C. ABDUL HAKEEM COLLEGE</h1>
+    <h2 class="text-yellow-300 font-bold text-lg md:text-xl mt-1">(AUTONOMOUS)</h2>
+    <p class="text-white mt-2">Hakeem Nagar, Melvisharam</p>
+    <p class="text-white">Accredited by NAAC “A+” Grade CGPA 3.5 out of 4</p>
+    <p class="text-white">
+      Affiliated to Thiruvalluvar University | 
+      <a href="http://www.cahc.edu.in" target="_blank" class="underline text-blue-300">www.cahc.edu.in</a>
+    </p>
+  </div>
+</header>
+
+
+<!-- 🔹 Seminar Title / Hero -->
+<section class="text-center py-8 reveal">
+  <div class="glass rounded-2xl p-8 md:p-12 soft-shadow">
+    <h1 class="text-3xl md:text-5xl font-extrabold leading-tight text-white">
+      From Campus to Corporate
+    </h1>
+    <p class="mt-3 text-purple-200 text-lg md:text-xl font-semibold">
+      Thriving in the IT World
+    </p>
+
+    <p class="mt-6 max-w-2xl mx-auto text-gray-100/90">
+      Transform your skills, sharpen your mindset, and step confidently into your dream career.
+    </p>
+  </div>
+</section>
+
+
+      <!-- Countdown -->
+      <section class="mt-10 reveal" id="countdownWrap">
+        <h3 class="text-xl md:text-2xl text-center font-bold mb-6">Countdown to Event</h3>
+        <div class="flex justify-center gap-4">
+          <div class="count-box glass text-center px-4 py-3"><div id="cd-days" class="count-value">0</div><div class="text-xs uppercase tracking-wider text-white/80 mt-1">Days</div></div>
+          <div class="count-box glass text-center px-4 py-3"><div id="cd-hours" class="count-value">0</div><div class="text-xs uppercase tracking-wider text-white/80 mt-1">Hours</div></div>
+          <div class="count-box glass text-center px-4 py-3"><div id="cd-minutes" class="count-value">0</div><div class="text-xs uppercase tracking-wider text-white/80 mt-1">Minutes</div></div>
+          <div class="count-box glass text-center px-4 py-3"><div id="cd-seconds" class="count-value">0</div><div class="text-xs uppercase tracking-wider text-white/80 mt-1">Seconds</div></div>
+        </div>
+      </section>
+
+      <!-- DETAILS + SPEAKER -->
+      <main id="details" class="mt-12 grid gap-8 md:grid-cols-2">
+        <!-- Event Details -->
+        <article class="glass rounded-2xl p-6 soft-shadow reveal">
+          <h4 class="text-lg font-semibold mb-4">Event Details</h4>
+          <p><strong>Date:</strong> September 24, 2025</p>
+          <p><strong>Time:</strong> 11:00 AM</p>
+          <p><strong>Location:</strong> Auditorium, C. Abdul Hakeem College</p>
+        </article>
+
+        <!-- Resource Person -->
+        <aside class="glass rounded-2xl p-6 soft-shadow reveal">
+          <div class="flex items-center gap-4">
+            <div class="w-20 h-20 rounded-full overflow-hidden">
+              <img src="resource person.png" alt="Resource Person" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h5 class="text-lg font-bold">Mr. H. Abdul Aleem</h5>
+              <div class="text-sm text-violet-200 font-medium">Senior Software Engineer — IQVIA, Bangalore</div>
+            </div>
+          </div>
+          <p class="mt-4 text-sm text-white/80">Join us as our expert speaker shares practical insights for transitioning from campus life to a successful career in the IT industry. Expect real-world tips, interview readiness guidance, and career roadmap advice.</p>
+        </aside>
+      </main>
+
+      <!-- Organizing Committee -->
+      <section class="mt-12 reveal">
+        <h3 class="text-2xl font-bold mb-6 text-center">Organizing Committee</h3>
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="rounded-xl p-6 shadow-md bg-gradient-to-br from-violet-700/30 to-blue-600/20 border border-white/10">
+            <h4 class="text-lg font-semibold text-yellow-200 mb-4 text-center">Leadership</h4>
+            <div class="space-y-3 text-center text-white/90">
+              <div><strong>Dr. S. Zaheer Ahmed, Ph.D.</strong> — Principal</div>
+              <div><strong>Dr. S. A Sajid, Ph.D.</strong> — Dean of Academics</div>
+            </div>
+          </div>
+          <div class="rounded-xl p-6 shadow-md bg-gradient-to-br from-pink-600/30 to-red-500/20 border border-white/10">
+            <h4 class="text-lg font-semibold text-green-200 mb-4 text-center">Core Organizers</h4>
+            <div class="space-y-3 text-center text-white/90">
+              <div><strong>Dr. G. Ramesh Kumar</strong> — Convener</div>
+              <div><strong>Dr. A Kalimullah</strong> — Co-ordinator</div>
+              <div><strong>Mr. K. Ifthikar Ahmed</strong> — Organizing Secretary</div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-8 rounded-2xl glass p-6 soft-shadow">
+          <h4 class="text-lg font-semibold mb-4">Organizing Members</h4>
+          <div class="max-w-xl mx-auto space-y-2 text-center text-white/90">
+            <p>Mr. K Ashfaque Ahamed</p>
+            <p>Mr. M.S. Mahfuzur Rahman</p>
+            <p>Mr. K. Abdul Ahed</p>
+            <p>Mr. A Teepu</p>
+            <p>Mr. Mabub Basha</p>
+            <p>Mr. M. Masood Ahamed</p>
+            <p>Mr. R Mohammed Ameenuddin</p>
+            <p>Mr. S. Sathish Kumar</p>
+            <p>Mr. A. Anbarasan</p>
+            <p>Mr. S. Syed Mohammed Jalaluddin</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="mt-12 text-center">
+        <div class="inline-block w-full md:w-auto bg-gradient-to-r from-violet-700 to-indigo-600 px-6 py-3 rounded-lg">
+          <div class="text-base font-semibold">All are cordially invited · Auditorium · 11:00 AM</div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Reveal on scroll
+    (function () {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    })();
+
+    // Countdown
+    (function () {
+      const target = new Date('2025-09-24T11:00:00').getTime();
+      const daysEl = document.getElementById('cd-days');
+      const hoursEl = document.getElementById('cd-hours');
+      const minsEl = document.getElementById('cd-minutes');
+      const secsEl = document.getElementById('cd-seconds');
+
+      function setAndPulse(el, value) {
+        if (!el) return;
+        if (el.textContent !== String(value)) {
+          el.textContent = value;
+          el.classList.add('pulse');
+          setTimeout(() => el.classList.remove('pulse'), 280);
+        }
+      }
+      function update() {
+        const now = Date.now();
+        let diff = Math.max(0, target - now);
+        const days = Math.floor(diff / (1000*60*60*24)); diff -= days*86400000;
+        const hours = Math.floor(diff / (1000*60*60)); diff -= hours*3600000;
+        const minutes = Math.floor(diff / (1000*60)); diff -= minutes*60000;
+        const seconds = Math.floor(diff / 1000);
+        setAndPulse(daysEl, days);
+        setAndPulse(hoursEl, String(hours).padStart(2,'0'));
+        setAndPulse(minsEl, String(minutes).padStart(2,'0'));
+        setAndPulse(secsEl, String(seconds).padStart(2,'0'));
+      }
+      update(); setInterval(update, 1000);
+    })();
+  </script>
+</body>
+</html>
