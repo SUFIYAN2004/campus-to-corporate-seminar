@@ -1,234 +1,494 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>From Campus to Corporate — Seminar</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Trivilling in the IT world</title>
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-strong: rgba(255, 255, 255, 0.12);
+            --accent: #7c3aed;
+        }
 
-  <style>
-    :root {
-      --glass: rgba(255,255,255,0.08);
-      --glass-strong: rgba(255,255,255,0.12);
-      --accent: #7c3aed;
-    }
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            /* Prevent outer scrollbar */
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
 
-    html,body { height:100%; margin:0; overflow-x:hidden; }
-    body {
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: url('background.jpg') center/cover no-repeat fixed;
-      color: #fff;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
+        .relative.min-h-screen {
+            height: 100vh;
+            /* Full viewport height */
+            overflow-y: auto;
+            /* Enable inner scrolling */
+        }
 
-    .bg-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, rgba(19,6,58,0.45), rgba(110,12,200,0.35) 50%, rgba(24,6,46,0.55));
-      mix-blend-mode: multiply;
-      pointer-events:none;
-      animation: shift 12s linear infinite;
-    }
-    @keyframes shift {
-      0% { transform:translateY(0) scale(1); filter: hue-rotate(0deg); }
-      50% { transform:translateY(-20px) scale(1.02); filter: hue-rotate(8deg); }
-      100% { transform:translateY(0) scale(1); filter: hue-rotate(0deg); }
-    }
+        body {
+            background: url('background.jpg') center/cover no-repeat fixed;
+            color: #fff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-    .glass {
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
+        /* Animated gradient overlay */
+        .bg-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(19, 6, 58, 0.45), rgba(110, 12, 200, 0.35) 50%, rgba(24, 6, 46, 0.55));
+            mix-blend-mode: multiply;
+            pointer-events: none;
+            animation: shift 12s linear infinite;
+        }
 
-    .reveal { opacity:0; transform: translateY(8px); transition: all 700ms cubic-bezier(.2,.9,.2,1); }
-    .reveal.visible { opacity:1; transform: translateY(0); }
+        @keyframes shift {
+            0% {
+                transform: translateY(0) scale(1);
+                filter: hue-rotate(0deg);
+            }
 
-    .count-box { min-width:76px; border-radius:12px; padding:10px; }
-    .count-value { font-weight:800; font-size:1.4rem; letter-spacing:0.5px; }
-    .pulse { transform: scale(1.06); transition: transform 260ms cubic-bezier(.2,.9,.2,1); }
+            50% {
+                transform: translateY(-20px) scale(1.02);
+                filter: hue-rotate(8deg);
+            }
 
-    .btn-primary {
-      background: linear-gradient(90deg,#7c3aed,#06b6d4);
-      box-shadow: 0 8px 28px rgba(124,58,237,0.22);
-    }
-    .btn-primary:active { transform: translateY(1px); }
+            100% {
+                transform: translateY(0) scale(1);
+                filter: hue-rotate(0deg);
+            }
+        }
 
-    .btn-share { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.04); padding:8px 10px; border-radius:8px; }
-    .soft-shadow { box-shadow: 0 10px 30px rgba(2,6,23,0.45); }
-  </style>
+        .glass {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass:hover {
+            transform: perspective(600px) rotateX(2deg) rotateY(2deg) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(8px);
+            transition: all 700ms cubic-bezier(.2, .9, .2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .count-box {
+            min-width: 76px;
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        .count-value {
+            font-weight: 800;
+            font-size: 1.6rem;
+            letter-spacing: 0.5px;
+            color: #fffb;
+            text-shadow: 0 0 10px #fff;
+        }
+
+        .pulse {
+            transform: scale(1.06);
+            transition: transform 0.26s cubic-bezier(.2, .9, .2, 1);
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 9999;
+        }
+
+        .animate-fade-scale {
+            opacity: 0;
+            transform: scale(0.95);
+            animation: fadeScale 0.8s forwards;
+        }
+
+        .animate-fade-scale.delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .animate-fade-scale.delay-400 {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes fadeScale {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <div class="relative min-h-screen">
-    <div class="bg-overlay"></div>
+    <div class="relative min-h-screen">
+        <div class="bg-overlay"></div>
 
-    <!-- 🔹 College Header -->
-<header class="text-center py-8 reveal">
-  <div class="glass rounded-2xl p-6 md:p-8 inline-block soft-shadow">
-    <!-- Logo -->
-<div class="flex justify-center mb-4">
-  <img src="cahc.png" 
-       alt="College Logo" 
-       class="w-20 h-20 object-contain filter invert brightness-0" />
-</div>
+        <!-- Header -->
+        <header class="text-center py-8 reveal">
+            <div class="glass rounded-2xl p-6 md:p-8 inline-block">
+                <div class="flex justify-center mb-4">
+                    <img src="cahc.png" alt="College Logo"
+                        class="w-20 h-20 object-contain filter invert brightness-0" />
+                </div>
+                <h1 class="text-yellow-400 font-extrabold text-2xl md:text-3xl">C. ABDUL HAKEEM COLLEGE</h1>
+                <h2 class="text-yellow-300 font-bold text-lg md:text-xl mt-1">(AUTONOMOUS)</h2>
+                <p class="text-white mt-2">Hakeem Nagar, Melvisharam</p>
+                <p class="text-white">Accredited by NAAC “A+” Grade CGPA 3.5 out of 4</p>
+                <p class="text-white">
+                    Affiliated to Thiruvalluvar University |
+                    <a href="http://www.cahc.edu.in" target="_blank" class="underline text-blue-300 longpress-link"
+                        data-title="www.cahc.edu.in">www.cahc.edu.in</a>
+                </p>
+            </div>
+        </header>
 
+        <!-- Hero -->
+        <section class="text-center py-16 reveal">
+            <div class="glass rounded-2xl p-8 md:p-12 relative overflow-hidden">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight text-white animate-fade-scale">
+                    Trivilling in the IT world
+                </h1>
+                <p class="mt-3 text-purple-200 text-lg md:text-xl font-semibold animate-fade-scale delay-200">
+                    Thriving in the IT World
+                </p>
+                <p class="mt-6 max-w-2xl mx-auto text-gray-100/90 animate-fade-scale delay-400">
+                    Transform your skills, sharpen your mindset, and step confidently into your dream career.
+                </p>
+            </div>
+        </section>
 
-    <!-- Text -->
-    <h1 class="text-yellow-400 font-extrabold text-2xl md:text-3xl">C. ABDUL HAKEEM COLLEGE</h1>
-    <h2 class="text-yellow-300 font-bold text-lg md:text-xl mt-1">(AUTONOMOUS)</h2>
-    <p class="text-white mt-2">Hakeem Nagar, Melvisharam</p>
-    <p class="text-white">Accredited by NAAC “A+” Grade CGPA 3.5 out of 4</p>
-    <p class="text-white">
-      Affiliated to Thiruvalluvar University | 
-      <a href="http://www.cahc.edu.in" target="_blank" class="underline text-blue-300">www.cahc.edu.in</a>
-    </p>
-  </div>
-</header>
+        <!-- Countdown -->
+        <section class="mt-12 reveal" id="countdownWrap">
+            <h3 class="text-xl md:text-2xl text-center font-bold mb-6">Countdown to Event</h3>
+            <div class="flex justify-center gap-4">
+                <div class="count-box glass text-center px-4 py-3">
+                    <div id="cd-days" class="count-value">0</div>
+                    <div class="text-xs uppercase tracking-wider text-white/80 mt-1">Days</div>
+                </div>
+                <div class="count-box glass text-center px-4 py-3">
+                    <div id="cd-hours" class="count-value">0</div>
+                    <div class="text-xs uppercase tracking-wider text-white/80 mt-1">Hours</div>
+                </div>
+                <div class="count-box glass text-center px-4 py-3">
+                    <div id="cd-minutes" class="count-value">0</div>
+                    <div class="text-xs uppercase tracking-wider text-white/80 mt-1">Minutes</div>
+                </div>
+                <div class="count-box glass text-center px-4 py-3">
+                    <div id="cd-seconds" class="count-value">0</div>
+                    <div class="text-xs uppercase tracking-wider text-white/80 mt-1">Seconds</div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Details & Speaker -->
+        <article class="glass rounded-2xl p-6 reveal">
+            <h4 class="text-lg font-semibold mb-4">Event Details</h4>
+            <p><strong>Date:</strong> September 24, 2025</p>
 
-<!-- 🔹 Seminar Title / Hero -->
-<section class="text-center py-8 reveal">
-  <div class="glass rounded-2xl p-8 md:p-12 soft-shadow">
-    <h1 class="text-3xl md:text-5xl font-extrabold leading-tight text-white">
-      From Campus to Corporate
-    </h1>
-    <p class="mt-3 text-purple-200 text-lg md:text-xl font-semibold">
-      Thriving in the IT World
-    </p>
+            <div class="mt-4 flex justify-center glass rounded-xl p-4 overflow-hidden">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://maps.app.goo.gl/o575a12e8SUheyZM9&size=250x250"
+                    alt="QR Code for C. Abdul Hakeem College"
+                    class="w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-lg shadow-lg">
+            </div>
 
-    <p class="mt-6 max-w-2xl mx-auto text-gray-100/90">
-      Transform your skills, sharpen your mindset, and step confidently into your dream career.
-    </p>
-  </div>
-</section>
-
-
-      <!-- Countdown -->
-      <section class="mt-10 reveal" id="countdownWrap">
-        <h3 class="text-xl md:text-2xl text-center font-bold mb-6">Countdown to Event</h3>
-        <div class="flex justify-center gap-4">
-          <div class="count-box glass text-center px-4 py-3"><div id="cd-days" class="count-value">0</div><div class="text-xs uppercase tracking-wider text-white/80 mt-1">Days</div></div>
-          <div class="count-box glass text-center px-4 py-3"><div id="cd-hours" class="count-value">0</div><div class="text-xs uppercase tracking-wider text-white/80 mt-1">Hours</div></div>
-          <div class="count-box glass text-center px-4 py-3"><div id="cd-minutes" class="count-value">0</div><div class="text-xs uppercase tracking-wider text-white/80 mt-1">Minutes</div></div>
-          <div class="count-box glass text-center px-4 py-3"><div id="cd-seconds" class="count-value">0</div><div class="text-xs uppercase tracking-wider text-white/80 mt-1">Seconds</div></div>
-        </div>
-      </section>
-
-      <!-- DETAILS + SPEAKER -->
-      <main id="details" class="mt-12 grid gap-8 md:grid-cols-2">
-        <!-- Event Details -->
-        <article class="glass rounded-2xl p-6 soft-shadow reveal">
-          <h4 class="text-lg font-semibold mb-4">Event Details</h4>
-          <p><strong>Date:</strong> September 24, 2025</p>
-          <p><strong>Time:</strong> 11:00 AM</p>
-          <p><strong>Location:</strong> Auditorium, C. Abdul Hakeem College</p>
+            <p class="mt-2 text-center">
+                Scan the QR code to view the location in Google Maps
+            </p>
         </article>
 
-        <!-- Resource Person -->
-        <aside class="glass rounded-2xl p-6 soft-shadow reveal">
-          <div class="flex items-center gap-4">
-            <div class="w-20 h-20 rounded-full overflow-hidden">
-              <img src="resource person.png" alt="Resource Person" class="w-full h-full object-cover">
+
+
+
+        <aside class="glass rounded-2xl p-6 reveal">
+            <div class="flex items-center gap-4">
+                <div class="w-20 h-20 rounded-full overflow-hidden">
+                    <img src="resource person.png" alt="Resource Person" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h5 class="text-lg font-bold">Mr. H. Abdul Aleem</h5>
+                    <div class="text-sm text-violet-200 font-medium">Senior Software Engineer — IQVIA, Bangalore
+                    </div>
+                </div>
             </div>
-            <div>
-              <h5 class="text-lg font-bold">Mr. H. Abdul Aleem</h5>
-              <div class="text-sm text-violet-200 font-medium">Senior Software Engineer — IQVIA, Bangalore</div>
-            </div>
-          </div>
-          <p class="mt-4 text-sm text-white/80">Join us as our expert speaker shares practical insights for transitioning from campus life to a successful career in the IT industry. Expect real-world tips, interview readiness guidance, and career roadmap advice.</p>
+            <p class="mt-4 text-sm text-white/80">Join us as our expert speaker shares practical insights for
+                transitioning from campus life to a successful career in the IT industry. Expect real-world tips,
+                interview readiness guidance, and career roadmap advice.</p>
         </aside>
-      </main>
+        </main>
 
-      <!-- Organizing Committee -->
-      <section class="mt-12 reveal">
-        <h3 class="text-2xl font-bold mb-6 text-center">Organizing Committee</h3>
-        <div class="grid gap-6 md:grid-cols-2">
-          <div class="rounded-xl p-6 shadow-md bg-gradient-to-br from-violet-700/30 to-blue-600/20 border border-white/10">
-            <h4 class="text-lg font-semibold text-yellow-200 mb-4 text-center">Leadership</h4>
-            <div class="space-y-3 text-center text-white/90">
-              <div><strong>Dr. S. Zaheer Ahmed, Ph.D.</strong> — Principal</div>
-              <div><strong>Dr. S. A Sajid, Ph.D.</strong> — Dean of Academics</div>
-            </div>
-          </div>
-          <div class="rounded-xl p-6 shadow-md bg-gradient-to-br from-pink-600/30 to-red-500/20 border border-white/10">
-            <h4 class="text-lg font-semibold text-green-200 mb-4 text-center">Core Organizers</h4>
-            <div class="space-y-3 text-center text-white/90">
-              <div><strong>Dr. G. Ramesh Kumar</strong> — Convener</div>
-              <div><strong>Dr. A Kalimullah</strong> — Co-ordinator</div>
-              <div><strong>Mr. K. Ifthikar Ahmed</strong> — Organizing Secretary</div>
-            </div>
-          </div>
-        </div>
-        <div class="mt-8 rounded-2xl glass p-6 soft-shadow">
-          <h4 class="text-lg font-semibold mb-4">Organizing Members</h4>
-          <div class="max-w-xl mx-auto space-y-2 text-center text-white/90">
-            <p>Mr. K Ashfaque Ahamed</p>
-            <p>Mr. M.S. Mahfuzur Rahman</p>
-            <p>Mr. K. Abdul Ahed</p>
-            <p>Mr. A Teepu</p>
-            <p>Mr. Mabub Basha</p>
-            <p>Mr. M. Masood Ahamed</p>
-            <p>Mr. R Mohammed Ameenuddin</p>
-            <p>Mr. S. Sathish Kumar</p>
-            <p>Mr. A. Anbarasan</p>
-            <p>Mr. S. Syed Mohammed Jalaluddin</p>
-          </div>
-        </div>
-      </section>
+        <!-- Organizing Committee -->
+        <section class="mt-12 reveal">
+            <h3 class="text-2xl font-bold mb-6 text-center">Organizing Committee</h3>
 
-      <!-- Footer -->
-      <footer class="mt-12 text-center">
-        <div class="inline-block w-full md:w-auto bg-gradient-to-r from-violet-700 to-indigo-600 px-6 py-3 rounded-lg">
-          <div class="text-base font-semibold">All are cordially invited · Auditorium · 11:00 AM</div>
-        </div>
-      </footer>
+            <div class="grid gap-6 md:grid-cols-2">
+
+                <!-- Patrons -->
+                <div
+                    class="rounded-xl p-6 shadow-md bg-gradient-to-br from-violet-700/30 to-blue-600/20 border border-white/10 glass">
+                    <h4 class="text-lg font-semibold text-yellow-200 mb-4 text-center">Patrons</h4>
+                    <div class="flex flex-col items-center gap-6">
+                        <div class="flex flex-col items-center glass rounded-xl p-4 hover:scale-105 hover:shadow-xl">
+                            <img src="principle.jpeg" alt="Dr. S. Zaheer Ahmed"
+                                class="w-24 h-24 rounded-full object-cover border-2 border-white/20">
+                            <strong class="mt-2 text-white text-center">Dr. S. Zaheer Ahmed, Ph.D.</strong>
+                            <span class="text-sm text-white/80 text-center">Principal</span>
+                        </div>
+                        <div class="flex flex-col items-center glass rounded-xl p-4 hover:scale-105 hover:shadow-xl">
+                            <img src="dean.png" alt="Dr. S. A Sajid"
+                                class="w-24 h-24 rounded-full object-cover border-2 border-white/20">
+                            <strong class="mt-2 text-white text-center">Dr. S. A Sajid, Ph.D.</strong>
+                            <span class="text-sm text-white/80 text-center">Dean of Academics</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Core Organizers -->
+                <div
+                    class="rounded-xl p-6 shadow-md bg-gradient-to-br from-pink-600/30 to-red-500/20 border border-white/10 glass">
+                    <h4 class="text-lg font-semibold text-green-200 mb-4 text-center">Core Organizers</h4>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <div class="flex flex-col items-center glass rounded-xl p-4 hover:scale-105 hover:shadow-xl">
+                            <img src="Mr.-G.-Ramesh-Kumar.jpg" alt="Dr. G. Ramesh Kumar"
+                                class="w-24 h-24 rounded-full object-cover border-2 border-white/20">
+                            <strong class="mt-2 text-white text-center">Dr. G. Ramesh Kumar</strong>
+                            <span class="text-sm text-white/80 text-center">Convener</span>
+                        </div>
+                        <div class="flex flex-col items-center glass rounded-xl p-4 hover:scale-105 hover:shadow-xl">
+                            <img src="Mr.-A.-Kalimulla.jpg" alt="Dr. A Kalimullah"
+                                class="w-24 h-24 rounded-full object-cover border-2 border-white/20">
+                            <strong class="mt-2 text-white text-center">Dr. A Kalimullah</strong>
+                            <span class="text-sm text-white/80 text-center">Co-ordinator</span>
+                        </div>
+                        <div class="flex flex-col items-center glass rounded-xl p-4 hover:scale-105 hover:shadow-xl">
+                            <img src="Mr.-K.-Ifthikar-Ahmed.jpg" alt="Mr. K. Ifthikar Ahmed"
+                                class="w-24 h-24 rounded-full object-cover border-2 border-white/20">
+                            <strong class="mt-2 text-white text-center">Mr. K. Ifthikar Ahmed</strong>
+                            <span class="text-sm text-white/80 text-center">Organizing Secretary</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Organizing Members -->
+                <div class="mt-8 rounded-2xl glass p-6">
+                    <h4 class="text-lg font-semibold mb-4 text-center">Organizing Members</h4>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <!-- Member 1 -->
+                        <div
+                            class="flex flex-col items-center glass rounded-xl p-4 transform transition-transform duration-300 hover:scale-105 hover:shadow-xl w-40">
+                            <img src="Mr.-K.-Ashfaq-Ahamed.jpg" alt="Mr. K Ashfaque Ahamed"
+                                class="w-20 h-20 rounded-full object-cover border-2 border-white/20">
+                            <strong class="mt-2 text-white text-center text-sm">Mr. K Ashfaque Ahamed</strong>
+                            <span class="text-xs text-white/70 text-center">Assistant Professor</span>
+                            <span class="text-xs text-white/70 text-center">Department of Computer Science &
+                                Applications</span>
+                        </div>
+                        <!-- Member 2 -->
+                        <div
+                            class="flex flex-col items-center glass rounded-xl p-4 transform transition-transform duration-300 hover:scale-105 hover:shadow-xl w-40">
+                            <img src="Mr.-M.S.-Mahfuzur-Rahman.jpg" alt="Mr. M.S. Mahfuzur Rahman"
+                                class="w-20 h-20 rounded-full object-cover border-2 border-white/20">
+                            <strong class="mt-2 text-white text-center text-sm">Mr. M.S. Mahfuzur Rahman</strong>
+                            <span class="text-xs text-white/70 text-center">Assistant Professor</span>
+                            <span class="text-xs text-white/70 text-center">Department of Computer Science &
+                                Applications</span>
+                        </div>
+                        <!-- Member 3 -->
+                        <div
+                            class="flex flex-col items-center glass rounded-xl p-4 transform transition-transform duration-300 hover:scale-105 hover:shadow-xl w-40">
+                            <img src="Mr.-K.-Abdul-Ahed.jpg" alt="Mr. K. Abdul Ahed"
+                                class="w-20 h-20 rounded-full object-cover border-2 border-white/20">
+                            <strong class="mt-2 text-white text-center text-sm">Mr. K. Abdul Ahed</strong>
+                            <span class="text-xs text-white/70 text-center">Assistant Professor</span>
+                            <span class="text-xs text-white/70 text-center">Department of Computer Science &
+                                Applications</span>
+                        </div>
+                        <!-- Member 4 -->
+                        <div
+                            class="flex flex-col items-center glass rounded-xl p-4 transform transition-transform duration-300 hover:scale-105 hover:shadow-xl w-40">
+                            <img src="Mr.-A.-Teepu.jpg" alt="Mr. A Teepu"
+                                class="w-20 h-20 rounded-full object-cover border-2 border-white/20">
+                            <strong class="mt-2 text-white text-center text-sm">Mr. A Teepu</strong>
+                            <span class="text-xs text-white/70 text-center">Assistant Professor</span>
+                            <span class="text-xs text-white/70 text-center">Department of Computer Science &
+                                Applications</span>
+                        </div>
+                        <!-- Member 5 -->
+                        <div
+                            class="flex flex-col items-center glass rounded-xl p-4 transform transition-transform duration-300 hover:scale-105 hover:shadow-xl w-40">
+                            <img src="Mr.-M.-Mabub-Basha.jpg" alt="Mr. Mabub Basha"
+                                class="w-20 h-20 rounded-full object-cover border-2 border-white/20">
+                            <strong class="mt-2 text-white text-center text-sm">Mr. Mabub Basha</strong>
+                            <span class="text-xs text-white/70 text-center">Assistant Professor</span>
+                            <span class="text-xs text-white/70 text-center">Department of Computer Science &
+                                Applications</span>
+                        </div>
+                        <!-- Member 6 -->
+                        <div
+                            class="flex flex-col items-center glass rounded-xl p-4 transform transition-transform duration-300 hover:scale-105 hover:shadow-xl w-40">
+                            <img src="dawood.jpeg" alt="Mr. MD. Dawood Hussain"
+                                class="w-20 h-20 rounded-full object-cover border-2 border-white/20">
+                            <strong class="mt-2 text-white text-center text-sm">Mr. MD. Dawood Hussain</strong>
+                            <span class="text-xs text-white/70 text-center">Assistant Professor</span>
+                            <span class="text-xs text-white/70 text-center">Department of Computer Science &
+                                Applications</span>
+                        </div>
+                        <!-- Member 7 -->
+                        <div
+                            class="flex flex-col items-center glass rounded-xl p-4 transform transition-transform duration-300 hover:scale-105 hover:shadow-xl w-40">
+                            <img src="masood.jpg" alt="Mr. M. Masood Ahamed"
+                                class="w-20 h-20 rounded-full object-cover border-2 border-white/20">
+                            <strong class="mt-2 text-white text-center text-sm">Mr. M. Masood Ahamed</strong>
+                            <span class="text-xs text-white/70 text-center">Assistant Professor</span>
+                            <span class="text-xs text-white/70 text-center">Department of Computer Science &
+                                Applications</span>
+                        </div>
+                        <!-- Member 8 -->
+                        <div
+                            class="flex flex-col items-center glass rounded-xl p-4 transform transition-transform duration-300 hover:scale-105 hover:shadow-xl w-40">
+                            <img src="ameen.png" alt="Mr. R Mohammed Ameenuddin"
+                                class="w-20 h-20 rounded-full object-cover border-2 border-white/20">
+                            <strong class="mt-2 text-white text-center text-sm">Mr. R Mohammed Ameenuddin</strong>
+                            <span class="text-xs text-white/70 text-center">Assistant Professor</span>
+                            <span class="text-xs text-white/70 text-center">Department of Computer Science &
+                                Applications</span>
+                        </div>
+                        <!-- Member 9 -->
+                        <div
+                            class="flex flex-col items-center glass rounded-xl p-4 transform transition-transform duration-300 hover:scale-105 hover:shadow-xl w-40">
+                            <img src="S.SATHISH-KUMAR.jpg" alt="Mr. S. Sathish Kumar"
+                                class="w-20 h-20 rounded-full object-cover border-2 border-white/20">
+                            <strong class="mt-2 text-white text-center text-sm">Mr. S. Sathish Kumar</strong>
+                            <span class="text-xs text-white/70 text-center">Assistant Professor</span>
+                            <span class="text-xs text-white/70 text-center">Department of Computer Science &
+                                Applications</span>
+                        </div>
+                        <!-- Member 10 -->
+                        <div
+                            class="flex flex-col items-center glass rounded-xl p-4 transform transition-transform duration-300 hover:scale-105 hover:shadow-xl w-40">
+                            <img src="sir.png" alt="Mr. A. Anbarasan"
+                                class="w-20 h-20 rounded-full object-cover border-2 border-white/20">
+                            <strong class="mt-2 text-white text-center text-sm">Mr. A. Anbarasan</strong>
+                            <span class="text-xs text-white/70 text-center">Assistant Professor</span>
+                            <span class="text-xs text-white/70 text-center">Department of Computer Science &
+                                Applications</span>
+                        </div>
+                        <!-- Member 11 -->
+                        <div
+                            class="flex flex-col items-center glass rounded-xl p-4 transform transition-transform duration-300 hover:scale-105 hover:shadow-xl w-40">
+                            <img src="https://ui-avatars.com/api/?name=S.+Syed+Mohammed+Jalaluddin&background=7c3aed&color=fff&size=128"
+                                class="w-20 h-20 rounded-full object-cover border-2 border-white/20">
+                            <strong class="mt-2 text-white text-center text-sm">Mr. S. Syed Mohammed Jalaluddin</strong>
+                            <span class="text-xs text-white/70 text-center">Assistant Professor</span>
+                            <span class="text-xs text-white/70 text-center">Department of Computer Science &
+                                Applications</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
     </div>
-  </div>
+    </section>
 
-  <!-- Scripts -->
-  <script>
-    // Reveal on scroll
-    (function () {
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-      }, { threshold: 0.12 });
-      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-    })();
+    <!-- Footer -->
+    <footer class="mt-12 text-center">
+        <div class="inline-block w-full md:w-auto bg-gradient-to-r from-violet-700 to-indigo-600 px-6 py-3 rounded-lg">
+            <div class="text-base font-semibold">All are cordially invited</div>
+        </div>
+    </footer>
+    </div>
 
-    // Countdown
-    (function () {
-      const target = new Date('2025-09-24T11:00:00').getTime();
-      const daysEl = document.getElementById('cd-days');
-      const hoursEl = document.getElementById('cd-hours');
-      const minsEl = document.getElementById('cd-minutes');
-      const secsEl = document.getElementById('cd-seconds');
+    <!-- Tooltip -->
+    <div class="tooltip" id="tooltip"></div>
 
-      function setAndPulse(el, value) {
-        if (!el) return;
-        if (el.textContent !== String(value)) {
-          el.textContent = value;
-          el.classList.add('pulse');
-          setTimeout(() => el.classList.remove('pulse'), 280);
-        }
-      }
-      function update() {
-        const now = Date.now();
-        let diff = Math.max(0, target - now);
-        const days = Math.floor(diff / (1000*60*60*24)); diff -= days*86400000;
-        const hours = Math.floor(diff / (1000*60*60)); diff -= hours*3600000;
-        const minutes = Math.floor(diff / (1000*60)); diff -= minutes*60000;
-        const seconds = Math.floor(diff / 1000);
-        setAndPulse(daysEl, days);
-        setAndPulse(hoursEl, String(hours).padStart(2,'0'));
-        setAndPulse(minsEl, String(minutes).padStart(2,'0'));
-        setAndPulse(secsEl, String(seconds).padStart(2,'0'));
-      }
-      update(); setInterval(update, 1000);
-    })();
-  </script>
+    <script>
+        // Reveal on scroll
+        (function () {
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+            }, { threshold: 0.12 });
+            document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        })();
+
+        // Countdown
+        (function () {
+            const target = new Date('2025-09-24T11:00:00').getTime();
+            const daysEl = document.getElementById('cd-days');
+            const hoursEl = document.getElementById('cd-hours');
+            const minsEl = document.getElementById('cd-minutes');
+            const secsEl = document.getElementById('cd-seconds');
+
+            function setAndPulse(el, value) {
+                if (!el) return;
+                if (el.textContent !== String(value)) {
+                    el.textContent = value;
+                    el.classList.add('pulse');
+                    setTimeout(() => el.classList.remove('pulse'), 280);
+                }
+            }
+
+            function update() {
+                const now = Date.now();
+                let diff = Math.max(0, target - now);
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24)); diff -= days * 86400000;
+                const hours = Math.floor(diff / (1000 * 60 * 60)); diff -= hours * 3600000;
+                const minutes = Math.floor(diff / (1000 * 60)); diff -= minutes * 60000;
+                const seconds = Math.floor(diff / 1000);
+                setAndPulse(daysEl, days);
+                setAndPulse(hoursEl, String(hours).padStart(2, '0'));
+                setAndPulse(minsEl, String(minutes).padStart(2, '0'));
+                setAndPulse(secsEl, String(seconds).padStart(2, '0'));
+            }
+
+            update();
+            setInterval(update, 1000);
+        })();
+
+        // Long press tooltip
+        (function () {
+            let timer;
+            const tooltip = document.getElementById('tooltip');
+            document.querySelectorAll('.longpress-link').forEach(link => {
+                link.addEventListener('mousedown', e => {
+                    timer = setTimeout(() => {
+                        tooltip.textContent = link.dataset.title;
+                        const rect = link.getBoundingClientRect();
+                        tooltip.style.top = rect.top - 30 + 'px';
+                        tooltip.style.left = rect.left + 'px';
+                        tooltip.style.opacity = 1;
+                    }, 600);
+                });
+                link.addEventListener('mouseup', e => { clearTimeout(timer); tooltip.style.opacity = 0; });
+                link.addEventListener('mouseleave', e => { clearTimeout(timer); tooltip.style.opacity = 0; });
+            });
+        })();
+    </script>
 </body>
+
 </html>
